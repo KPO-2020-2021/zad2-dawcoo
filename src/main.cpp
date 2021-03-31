@@ -3,11 +3,45 @@
 
 using namespace std;
 
-
-
-
 int main(int argc, char **argv)
 {
+
+    LZespolona liczba1;
+    liczba1.re = 2;
+    liczba1.im = 3;
+
+    LZespolona liczba2;
+    liczba2.re = -2;
+    liczba2.im = -3;
+
+    LZespolona liczba3;
+    liczba3.re = 2.3;
+    liczba3.im = -3.1;
+/*
+    Wyswietl(liczba1);
+    cout << endl;
+    Wyswietl(liczba2);
+    cout << endl;
+    Wyswietl(liczba3);
+    cout << endl;
+
+    LZespolona wynik1 = liczba1 + liczba3;
+    Wyswietl(wynik1);
+
+    if (wynik1.re == 4.3 && wynik1.im == -0.1) {
+        cout << "Wynik testu dodawania - OK" << endl;
+    }
+    else
+    {
+        cout << "Wynik testu dodawania - NOK" << endl;
+    }
+    */
+    LZespolona wynik2 = liczba1 * liczba3;
+    Wyswietl(wynik2);
+    
+    
+
+
 
   if (argc < 2) {
     cout << endl;
@@ -16,7 +50,6 @@ int main(int argc, char **argv)
     cout << endl;
     return 1;
   }
-
 
   BazaTestu   BazaT = { nullptr, 0, 0 };
 

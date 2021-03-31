@@ -1,30 +1,6 @@
 #include "LZespolona.hh"
-#include <cmath>
 
-#define MIN_DIFF 0.00001
 
-/*!
- * Realizuje porównanie dwoch liczb zespolonych.
- * Argumenty:
- *    Skl1 - pierwsza porównywana liczba zespolona,
- *    Skl2 - druga porównywana liczba zespolona.
- * Zwraca:
- *    True dla równych liczb zespolonych.
- */
-
-bool  operator == (LZespolona  Skl1,  LZespolona  Skl2){
-  if ((Skl1.re == Skl2.re) && (Skl1.im == Skl2.im))
-    return true;
-  else
-    return false;
-  //alternatywnie, dla MIN_DIFF i wyników od użytkownika
-  /*
-  if abs(Skl1.re - Skl2.re) <= MIN_DIFF && abs(Skl1.im - Skl2.im) <= MIN_DIFF
-    return true;
-  else
-    return false;
-  */
-}
 
 /*!
  * Realizuje dodanie dwoch liczb zespolonych.
@@ -34,27 +10,83 @@ bool  operator == (LZespolona  Skl1,  LZespolona  Skl2){
  * Zwraca:
  *    Sume dwoch skladnikow przekazanych jako parametry.
  */
-LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2){
-  LZespolona  Wynik;
 
-  Wynik.re = Skl1.re + Skl2.re;
-  Wynik.im = Skl1.im + Skl2.im;
-  return Wynik;
+LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2)
+{
+	LZespolona  Wynik;
+
+	Wynik.re = Skl1.re + Skl2.re;
+	Wynik.im = Skl1.im + Skl2.im;
+	return Wynik;
+}
+
+LZespolona  operator - (LZespolona  Skl1, LZespolona  Skl2) 
+{
+	LZespolona wynik;
+
+	wynik.re = Skl1.re - Skl2.re;
+	wynik.im = Skl1.im - Skl2.im;
+
+	return wynik;
+}
+
+LZespolona operator * (LZespolona  Skl1, LZespolona  Skl2) 
+{
+	double a = Skl1.re * Skl2.re;
+	double b = Skl1.im * Skl2.im*-1;
+	double c = Skl1.re * Skl2.im + Skl1.im * Skl2.re;
+	LZespolona wynik;
+	wynik.re = a + b;
+	wynik.im = c;
+	return wynik;
+}
+LZespolona operator / (LZespolona Skl1, double Skl2)
+{
+	LZespolona wynik;
+	if (Skl2 == 0)
+	{
+		cerr << "nie wolno dzielic przez 0";
+	}
+	else
+	{
+		wynik.re = Skl1.re / Skl2;
+		wynik.im = Skl1.im / Skl2;
+	}
+	return wynik;
+}
+LZespolona operator / (LZespolona Skl1, LZespolona Skl2)
+{
+	LZespolona Licznik = Skl1 * Sprzezenie(Skl2);
+	double Mianownik = Modul(Skl2)*Modul(Skl2);
+	LZespolona wynik = Licznik / Mianownik;
+	return wynik;
 }
 
 
-/*!
- * Realizuje dzielenie liczby zespolonej przez skakar.
- * Argumenty:
- *    Skl1 - dzielona liczba zespolona,
- *    Skl2 - skalar-dzielnik.
- * Zwraca:
- *    Wynik dzielenia dwoch skladnikow przekazanych jako parametry.
- */
-LZespolona  operator / (LZespolona  Skl1,  double  Skl2){
-  LZespolona  Wynik;
+LZespolona Sprzezenie(LZespolona liczba)
+{
+	LZespolona wynik;
+	wynik.re = liczba.re;
+	wynik.im = -liczba.im;
+	return wynik;
+}
+double Modul(LZespolona liczba)
+{
+	double wynik;
+	wynik = liczba.re * liczba.re+liczba.im*liczba.im;
+	wynik = sqrt(wynik);
+	return wynik;
+}
 
-  Wynik.re = Skl1.re / Skl2;
-  Wynik.im = Skl1.im / Skl2;
-  return Wynik;
+
+
+void Wyswietl(LZespolona liczba)
+{
+	if (liczba.im >= 0) {
+		cout << "(" << liczba.re << "+" << liczba.im << "i" << ")";
+	}
+	else
+	{
+		cout << "(" << liczba.re << liczba.im << "i" << ")";
+	}
 }
