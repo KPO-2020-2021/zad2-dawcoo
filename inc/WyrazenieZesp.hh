@@ -11,8 +11,6 @@
  */
 enum Operator { Op_Dodaj, Op_Odejmij, Op_Mnoz, Op_Dziel };
 
-
-
 /*
  * Modeluje pojecie dwuargumentowego wyrazenia zespolonego
  */
@@ -22,12 +20,10 @@ struct WyrazenieZesp {
   LZespolona   Arg2;   // Drugi argument wyrazenia arytmetycznego
 };
 
-
 /*
  * Funkcje ponizej nalezy zdefiniowac w module.
  *
  */
-
 
 void Wyswietl(WyrazenieZesp  WyrZ);
 LZespolona Oblicz(WyrazenieZesp  WyrZ);
